@@ -1,0 +1,46 @@
+name: release
+
+# Builds the icon and cursor packs for every v* tag and publishes the tarball.
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-gi python3-gi-cairo python3-cairo gir1.2-rsvg-2.0 python3-numpy python3-pil
+
+      - name: Vendored upstream glyph gate
+        run: python3 tools/dev/check_upstream_assets.py
+
+      - name: Build icon pack
+        run: python3 tools/icons/generate_icons.py
+
+      - name: Build cursor pack
+        run: python3 tools/icons/generate_cursors.py
+
+      - name: Pack structure gate
+        run: python3 tools/dev/validate_icons.py
+
+      - name: Package
+        run: sh tools/icons/package.sh "${GITHUB_REF_NAME#v}"
+
+      - name: Release archive gate
+        run: python3 tools/dev/check_release_archive.py
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.tar.xz
+          generate_release_notes: true

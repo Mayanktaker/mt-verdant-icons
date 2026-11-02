@@ -1,0 +1,9 @@
+# build output
+build/
+dist/
+# python
+__pycache__/
+*.pyc
+# editors / os
+.DS_Store
+*.swp

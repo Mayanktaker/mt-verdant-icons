@@ -1,0 +1,32 @@
+{
+  "meta": {
+    "name": "MT Verdant Icon Pack",
+    "tech_name": "MT-Verdant-Icon-Pack",
+    "version": "1.0.0",
+    "direction": "Botanical Canopy dark icon and cursor suite",
+    "source": "Extracted from the MT Verdant Nocturne theme suite and maintained standalone",
+    "upstream_theme": "https://github.com/Mayanktaker/mt-verdant-nocturne"
+  },
+  "packs": {
+    "icons": "MT-Verdant-Icons",
+    "cursors": "MT-Verdant-Cursors"
+  },
+  "colors": {
+    "obsidian": "#0F141B",
+    "canvas": "#122329",
+    "sage": "#8FB8A6",
+    "emerald": "#3DD68C",
+    "coral": "#E5737F",
+    "ink": "#EDF5F1",
+    "shadow": "#000000"
+  },
+  "aliases": {
+    "obsidian": ["#0F141B"],
+    "canvas": ["#122329"],
+    "sage": ["#8FB8A6"],
+    "emerald": ["#3DD68C"],
+    "coral": ["#E5737F"],
+    "ink": ["#EDF5F1"],
+    "shadow": ["#000000"]
+  }
+}

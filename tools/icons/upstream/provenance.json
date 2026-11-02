@@ -1,0 +1,184 @@
+{
+  "generated_by": "tools/dev/vendor_upstream_icons.py",
+  "host": {
+    "gnome_shell": "GNOME Shell 51.1",
+    "libadwaita": "1.10.0",
+    "platform": "Linux-7.3.1-1-cachyos-x86_64-with-glibc2.44"
+  },
+  "sets": {
+    "adwaita": {
+      "count": 19,
+      "icons": {
+        "adw-adaptive-preview-symbolic.svg": "ed45da9439200811dd6118cf80b24a3b7c41518c2cf2892f4c6d541aaca4a37f",
+        "adw-application-exit-symbolic-rtl.svg": "52276d69bfb67034994d1ff64f3d543b8450abc43410ac485642da34436109a6",
+        "adw-application-exit-symbolic.svg": "62a031cfbf687d882ed35241b999f9aa7eaec8c4347d2dbc784a5e2514bd483c",
+        "adw-avatar-default-symbolic.svg": "76be606b95bd667bf0108d9ea627a29751876af49bf3bf350dae73028a587ee3",
+        "adw-entry-apply-symbolic.svg": "10bc3f9d8191b391a500891b299ad3a32f7489ecbcc87eae692fa02be5aa77b4",
+        "adw-entry-edit-symbolic.svg": "7da378c157fbc6b5b0f750f4359d11dbf7f657359f2792f0c3ee002943f8ea2a",
+        "adw-expander-arrow-symbolic.svg": "c765a15da4ec1797b04c3bc507cb4c1ef0480cf55f388bcf2eafdf807d8ca087",
+        "adw-external-link-symbolic.svg": "ef5e27d7c058faa8cce4bef775839f0326b22d6433099122cbabf6d878067bd0",
+        "adw-mail-send-symbolic.svg": "e2f2fe38a96acea34b9c68355f3e3803d8ab5d30b18458484b9baf085e128da7",
+        "adw-rotate-acw-symbolic.svg": "75fb1c8dc52acf5a5e4667d67424f74333f9c7a636b105641a01b5410bbc35b8",
+        "adw-rotate-cw-symbolic.svg": "eb8a0b07683a8ce16dc7250e5e55cf5ff8320864d2298278efd967561f7e6fc1",
+        "adw-screenshot-symbolic.svg": "68bc9546900a2c1692b92241af6fc58308ec993c42a5a59b13c6824efe5281ab",
+        "adw-sidebar-symbolic-rtl.svg": "5be940fd7bffb1bb2a508050d801aba78cb6368c7ebaa9b30d7c94f482deb4f7",
+        "adw-sidebar-symbolic.svg": "0c5a93bca4dcb7fba1bc36e67443e32a2f4fcc7f00c6145d504bf6d4355d4d60",
+        "adw-tab-counter-symbolic.svg": "2d490bb7b7679930b7eaa8a1556ba1adf782909bf02c0171846522d9376f47dd",
+        "adw-tab-icon-missing-symbolic.svg": "d7db78f57da6bd28d5f9ff5d17acf56dff5701cc81448b353988d675c87775a3",
+        "adw-tab-new-symbolic.svg": "db11fbb9e6c6cabdf84828f106e2eb42763a254abb113a11e8d035543cf6e2a4",
+        "adw-tab-overflow-symbolic.svg": "e30e2ff696542ec2cb1ac2788840e182827d05b545e2a81c8ec4bc9e1627ecc7",
+        "adw-tab-unpin-symbolic.svg": "ea96d58669b3df70422e4f9f5f25b0e9e650cc7be03d147d954c3bee8caa2c1e"
+      },
+      "license": "LGPL-3.0-or-later for the code, CC-BY-SA-3.0 for the artwork",
+      "license_files": [
+        "LICENSES/LGPL-3.0.txt",
+        "LICENSES/CC-BY-SA-3.0.txt"
+      ],
+      "origin": "libadwaita GResource"
+    },
+    "blur-my-shell": {
+      "count": 19,
+      "icons": {
+        "add-row-symbolic.svg": "2e23445832e0b46ebb7b1e88a72477d3e6f68b5e3ac6e012ceaab8af7d1053f6",
+        "applications-symbolic.svg": "fed5b5994922b649660f34d61d403f89274f6c5314e277bddfeb58a9043c7f1a",
+        "bottom-panel-symbolic.svg": "e01b11808924c25c9b976448bad81467a4d5adea3482f5b31994fd272f2f5eef",
+        "coverflow-symbolic.svg": "ce56f7f8cb259d3a30a381176e2a2c8f75764de9d77d9eb788ca3cb0edbca0cd",
+        "dash-symbolic.svg": "e7bab837fe64862665399e302717e99d62c0800ccdf70750edebc44df4adcfc9",
+        "down-symbolic.svg": "87f8952bbd68264b168f2678d4a03355b71cecb4808d2aabf8ff3df617f2fecd",
+        "duplicate-row-symbolic.svg": "9d9c68b746a99f58403e3f6a1461e058fa396105fb22618f536a487f087f983f",
+        "dynamic-mode-symbolic.svg": "23413b3e49017dcb246de1fe664178dcdf9a5d36046864e13ab70c2a0dde5904",
+        "edit-row-symbolic.svg": "db7ad88d061515dc843c70cada91b9b36701612c583ac4f61efd352652378f9a",
+        "lockscreen-symbolic.svg": "06ce7ec121440dbde3090af4b55979170b0898d9467d38e75759d6f8570499c6",
+        "overview-symbolic.svg": "0f314917ba1b2626254a1467f35fb49bfd6a9c182eed5966cc24369f195efe14",
+        "pipelines-symbolic.svg": "2b92ee967c01e9232276f1904b5ab88842eb3879198dcefd1487e543475bbdb4",
+        "popup-symbolic.svg": "d9f59d07414a8ab673400014796c731d622959bd61e50a495092edd8e4a44c91",
+        "remove-row-symbolic.svg": "900d76a0b2a37dda27d2f389b77bce2717fb96a92f5134aa8b71ad19da69b76b",
+        "screenshot-ui-symbolic.svg": "085c50cfcd23171ec7f68da6fb7f322da424d9bce7551795a861a9a7a99f5ffc",
+        "select-row-symbolic.svg": "9667b0342183143ba09d6d2fcba966305e5f11e04874ac61f65c907624f1a868",
+        "select-window-symbolic.svg": "ed4ea32ea66db7d5a7c0cd9c711425e7eb3d7c46546f12fe9c63d337936d763e",
+        "static-mode-symbolic.svg": "4261dfff17a8dbfc271405227408f3380c088bd34846278085819aba79300a1a",
+        "window-list-symbolic.svg": "b390e4500a74d8d838474189a622118ddfb88f4466f2b8b79e38e2db2f9beaa6"
+      },
+      "license": "GPL-3.0",
+      "license_files": [
+        "LICENSES/GPL-3.0.txt"
+      ],
+      "origin": "~/.local/share/gnome-shell/extensions/blur-my-shell@aunetx"
+    },
+    "gnome-shell": {
+      "count": 70,
+      "icons": {
+        "accessibility-bounce-keys-symbolic.svg": "8aad68d7c2ef2baaa9a9fcd14e9be5dbfc556a20957a903be82c0673d92a70d5",
+        "accessibility-high-contrast-symbolic.svg": "ac3488b6c7494c279cefb6ec6151064184f611285f550b54704e8e76fe137dbe",
+        "accessibility-keyboard-keys-symbolic.svg": "727b7fe4052ceab95c7bd2558a5bf3c1c923c24208004847277613f3e7c02cb4",
+        "accessibility-large-text-symbolic.svg": "1e0795fa438211af759e556c1034e4f16dde6cd97af60c6489bbeac2a75cd36b",
+        "accessibility-menu-symbolic.svg": "981df8924e1dd3a99c01bfea039f4ba3413320aff34ef51dba56855ae1a369ec",
+        "accessibility-mouse-keys-symbolic.svg": "295f4997415caad46c4847986658d962f8cd10f8a42b076221e8850c351518fa",
+        "accessibility-screen-reader-symbolic.svg": "bc92f491552becde9b906ccf948ccacec9f78b2e19067bc4dbe9b86c16120b2a",
+        "accessibility-slow-keys-symbolic.svg": "4289903e1570481d6a1918cbf018fe8c3ecdd352cd5cfaec30617f344b10795d",
+        "accessibility-sticky-keys-symbolic.svg": "6f86d96a35041be090eba9d301bcfa86defbe9f67b08311122c91544c6ae2832",
+        "accessibility-visual-alerts-symbolic.svg": "516569fe749566a369e56642233e79bb0566f47b58def7c6b8462a368522b5c2",
+        "accessibility-zoom-symbolic.svg": "b6da3d999db1bd4da4041092f753d883eb7bf92237818481a4543962501cca83",
+        "background-app-ghost-symbolic.svg": "07ba37ab90fd0d8cd07c654de56cc435ea535743646ec2d740d7e5ad87aac2fa",
+        "carousel-arrow-next-symbolic.svg": "0f97bba38e0b4ad72cea6ce886bc8466e0465dfbae0534088ef50d7b15906af2",
+        "carousel-arrow-previous-symbolic.svg": "94f64dec09e3adf44bade29bf424feddf413dbb04ea57c51b8ece64466cc8bdc",
+        "check-symbolic.svg": "3e8affcb93768d651ecf0b6029d873dce057f8e9a93ecfbd853ae8abc0d9824d",
+        "cog-wheel-symbolic.svg": "b400921123c670ce118fcaf6c35bc7c577a612418e38c10dc7154c02b49738f4",
+        "color-pick.svg": "e035f6dd00f66d0919bdc8576ba724f239491846abcf4ebddc8a1f8b6c211a88",
+        "dark-mode-symbolic.svg": "eb281209fae2edf34ce774d84dadd5ba7ff05edd51ae6dcf7ea788844d641123",
+        "fingerprint-auth-symbolic.svg": "f993c73ec7fa2499f2eb0f29fdf6b04c69eb1f12980162944df4f3d1b6dcb2b1",
+        "group-collapse-symbolic.svg": "eaa4e9644ac40a4893fd0531287b2916de25c52ef1c1b7140a5513a0c2fb4b84",
+        "keyboard-brightness-high-symbolic.svg": "ed29c793db175c22e3a4bfe4f7034f2a931f6bd96bdc14909ce6f7b6b522c14c",
+        "keyboard-brightness-medium-symbolic.svg": "f5b2c4a6946161be87143d8e2f8cfcbbbaa9ea8eacc5208ba8d6d3a3de59b058",
+        "keyboard-brightness-off-symbolic.svg": "694340b0e51386574cd1c6e6c4c1c85f64002c7bc8a2d45e114c6c6113d20eaa",
+        "message-indicator-symbolic.svg": "b68b94264eb708308c2a531bc7a1321c75561d1450776d742795fccb8bccb783",
+        "no-notifications-symbolic.svg": "4e53fd0895ae7d7868992b8af2cba3be5c06474f592fd30c056b02657135997b",
+        "notification-expand-symbolic.svg": "ba3ca2912e9c77ce1ae4fe649378acd1dd12a1b52961bf79be479735cee731b2",
+        "ornament-check-symbolic.svg": "ef9c0ec231bbe426a254f0c5b81b9ef4ec34f4bbef6a1d5310fd3ca1fa102df8",
+        "ornament-dot-checked-symbolic.svg": "25bef65ddccb982d670f99c2d5876b2b4f2dc5d50e756d078656ce2c871385ad",
+        "ornament-dot-unchecked-symbolic.svg": "b344f2ddf0ad1ff4f9907fc2b8b316360a9a49548e7da9e92ecfa95e193d0009",
+        "osk-caps-lock-symbolic.svg": "f11cafe3f6dcecbe999c34abd5d9dcada1e598190ec6ab458ba40de4349cfe7c",
+        "osk-delete-symbolic.svg": "366e74b9b59d4a13cd2c9d23739f67585c619be1f960a6fe8f448508662450ad",
+        "osk-emoji-picker-symbolic.svg": "b828dc0c8d885de87287021ea424dd8ea5214c8fe71f5caa84800ae3a4038729",
+        "osk-enter-symbolic.svg": "57791319b1bae22c8f4202f65d6c6b8ac21c8d725f626ac115dd8e48878adb1d",
+        "osk-hide-symbolic.svg": "06a1610798e79a3d509886ba67b50b8caee28433bd036398fd25217feb9afe4e",
+        "osk-layout-symbolic.svg": "5ffa1bcefb31caf6d2a9fb22f5a49926f5392da0f958c34cd01f873b9b5bab42",
+        "osk-shift-symbolic.svg": "9639306a72e1affc5c0ed30be2e530fd2d812324d19038cd1f1895c27d7e8aad",
+        "osk-zwnj-symbolic.svg": "9c25ef82ab3711de39b647691a1c242bce26f43b5980a583fb7bee604f6440a3",
+        "pointer-double-click-symbolic.svg": "d7623f63a221cc999c391bc041e144c90aa9c5cef5b98f93484061e146b91768",
+        "pointer-drag-symbolic.svg": "1a71c783a255b937ebfbb9df1e85bb0cf0698865e153a15987adfd9d7104c884",
+        "pointer-primary-click-symbolic.svg": "a41e89276d75823095ede92ad3632dfa70dd258356610628dbd769b7cc014673",
+        "pointer-secondary-click-symbolic.svg": "b9dc86550eb775a7118054988355ce19ad570a576fc52f61a6458cbf4bd72153",
+        "preview-close-symbolic.svg": "5397ce7d512e8b4907f3777f51ce6c8c43a39e9289357c79bb4ec3d8330f959a",
+        "record-screen-symbolic.svg": "b66f5f952312251e05add113fa339b68eb6f6c0961a1019a64da47d32f2f84a4",
+        "screen-privacy-disabled-symbolic.svg": "73d8fdb897ffc06a5d6d0a4c1415d462ace197c2dbfc35391d971202f3a381cb",
+        "screen-privacy-symbolic.svg": "e1382f80abfd000591e218693fad2e8cc933ff8bf388328bfa012499b8786e85",
+        "screencast-recorded-symbolic.svg": "7972fc1bb9740a598f1fc374abf6dce2b8c1c2c485f32f29021f002b8bfa11e9",
+        "screencast-stop-symbolic.svg": "683f24261f0a80f6825f579b89bb9c24d6dac55293e656947ecb7344fad2deb3",
+        "screenshooter-symbolic.svg": "c5a9bef0b8a43c35e62f169b0f2658897fb9fbb2acee307cf5c55695ea467825",
+        "screenshot-recorded-symbolic.svg": "adbcc1f734c6a86e417af186e811075598a3fe90917d4a6fe2948c1a82e5dbbe",
+        "screenshot-ui-area-symbolic.svg": "2bafe7d1c7b75c66e9e8ae6411c2eb41e305c214ee61abade32414ea72d8174e",
+        "screenshot-ui-display-symbolic.svg": "350d1a39102595248015bf16812455fcf6e637ed787d579dfa441d6485489e40",
+        "screenshot-ui-show-pointer-symbolic.svg": "e3f052a7f313d44f3106cc2d61b9d4ee8edf10e369ff1bf61cef13bb76d1ab74",
+        "screenshot-ui-window-symbolic.svg": "06bed3e1a90d4051311f530386eeea2cc03867edbb7f2c950d94c46b16027622",
+        "shell-display-built-in-only-symbolic.svg": "7815ad1f1d93ac798226b2b9e2425f1c078d028ff652856a3e6f46e0b3e12921",
+        "shell-display-extend-all-symbolic.svg": "a077d0cc852ce34b032647cad942bc65727b623c021dc3ef050e9553b7c64515",
+        "shell-display-external-only-symbolic.svg": "0e863d2f49f409fbd950198646db21e7295fdb64f8588dd8061ccd8a0d6084d2",
+        "shell-display-mirror-symbolic.svg": "92d90591be5982c35ad4eedd3fca658b6c8bd1b822015ccbccaaa52c73112175",
+        "shell-focus-app-grid-symbolic.svg": "3c961fce99d786648cbb897f88e1116c17f6adb9904e19c26090fd12cc3e1d5a",
+        "shell-focus-dash-symbolic-rtl.svg": "029cd04dfbbb2c1427d61729cfa1cf4cb69a8fb824da4b3d1d762f9bdf2b4423",
+        "shell-focus-dash-symbolic.svg": "fc37ce088b9656ae7290d601c8b169c6946e2e1084d18fa9d22945c678a7357e",
+        "shell-focus-desktop-symbolic-rtl.svg": "577ff4c422cafb296402de922064ae2dc6faab2db3a7a3c76a6b6f6e440aa40d",
+        "shell-focus-desktop-symbolic.svg": "ae7cb1976437c4cd131a3a9c39688ea9dab1a8155a0a7241767dd85c6c63610f",
+        "shell-focus-search-symbolic.svg": "64359797f28d72bde275a7b6f7c602c264c466c70aabdde7772f6d74e1585439",
+        "shell-focus-top-bar-symbolic-rtl.svg": "9eddd68cd829fe26d4a5c9928aad98e3a852ae995ffa369f137a70450961ce80",
+        "shell-focus-top-bar-symbolic.svg": "5cc543040292a7a80c6cc7c97f5dfa6daf7f995b23053f9a596a4d3539ef5d38",
+        "shell-focus-windows-symbolic.svg": "aa9d42f3dfc9c3af3945e36a85225745bcbc47530ff66ef1303fcd3bdbbd2fe3",
+        "switch-off-symbolic.svg": "1a3968636d05d9da7d53138467cfbc3a3c999dbb091c89cbbeb19d9b5c2b950f",
+        "switch-on-symbolic.svg": "482e7afd43255bee398caf237528949e483155b180abfa870a28028b73b22f54",
+        "vcard-symbolic.svg": "ae87e148571692df6fd4574973bd00f169aaf625267b1f48a9d40499612f501b",
+        "wellbeing-symbolic.svg": "32a1370995ffc6d27aa3639e7da211aaa5082342f6b818d43ade8735ef5c9aa7"
+      },
+      "license": "GPL-2.0-or-later",
+      "license_files": [
+        "LICENSES/GPL-2.0.txt"
+      ],
+      "origin": "gnome-shell-icons.gresource"
+    },
+    "retained": {
+      "count": 3,
+      "icons": {
+        "heart-symbolic.svg": "f3828ef9268be17fea519facc1f6effda7bdbbdb8b0b87757be7f20b7e4ca127",
+        "other-symbolic.svg": "3de36d6c3f89918b735d12d4aad4b335f3c28fa9041d37d3ffb88a3e39f6cd07",
+        "reset-symbolic.svg": "a58c5963d777205c4fe1cceda019dfcef099a8ba5d30a6969a4ccfa186a9d162"
+      },
+      "license": "mixed upstream licenses retained from the originating sets",
+      "license_files": [
+        "LICENSES/GPL-3.0.txt",
+        "LICENSES/CC-BY-SA-4.0.txt"
+      ],
+      "origin": "previous pack harvest retained for compatibility"
+    },
+    "tiling-shell": {
+      "count": 11,
+      "icons": {
+        "add-symbolic.svg": "7629e65b2b88a38680a4f997a54a0b6faa20d37686a8ac59d65937a62099750f",
+        "cancel-symbolic.svg": "a8ebc05d1bd7d74f67257a8b5e48de41275b52efc54dec26bb557d7c1e79d086",
+        "chevron-left-symbolic.svg": "7ac1d37b4587c3934072d9f1493f592adf46d6210e4d1aa404666a91b1c7e8e0",
+        "chevron-right-symbolic.svg": "0f183af2043123e3c1d31784582677b9673ce9f054c2216ecbb2df56d2f2fc7e",
+        "delete-symbolic.svg": "830d9eef7b4727f71b593104c8daa7bf35c41ef09851d59bbf5719c4441d099c",
+        "edit-symbolic.svg": "36e986c11359f153e18b9b28da74f61f47d59ef56e0e7f01c262f22adc1a48e6",
+        "indicator-symbolic.svg": "dcecd26be16565190b6d7d92763e1f529827c19091b5c9cacc78ba7bef02ad7b",
+        "info-symbolic.svg": "423059c6fe91a60b449ac53fb966ed6be58233949a530cb4eaffd4c0e511ff6a",
+        "menu-symbolic.svg": "ca8a46790f5afb416be4379f405a98897dcfd8fdde88163d66333fde421d958e",
+        "prefs-symbolic.svg": "ee7db534fb5d6e2d9b7997d7c7d234e18918843657dd759b7a6e9933a6c13718",
+        "save-symbolic.svg": "8ebec8518ef78fafef3ba71c81502c9b73729f15cb204f88850bbaa666e2c34b"
+      },
+      "license": "GPL-3.0",
+      "license_files": [
+        "LICENSES/GPL-3.0.txt"
+      ],
+      "origin": "~/.local/share/gnome-shell/extensions/tilingshell@ferrarodomenico.com"
+    }
+  }
+}
