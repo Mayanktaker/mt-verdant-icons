@@ -27,9 +27,10 @@ jobs:
       - name: Build cursor pack
         run: python3 tools/icons/generate_cursors.py
 
-      # SVG and Xcursor output is deterministic Python; PNG rasterisation depends on librsvg.
-      - name: Committed SVG and cursor artwork is up to date
-        run: git diff --exit-code -- ':(glob)src/icons/**/*.svg' 'src/cursors'
+      # SVG output is deterministic Python; PNG and Xcursor rasterisation depend on the runner's
+      # librsvg/Pillow build, so only the vector artwork is compared byte for byte.
+      - name: Committed SVG artwork is up to date
+        run: git diff --exit-code -- ':(glob)src/icons/**/*.svg' ':(glob)src/icons/**/index.theme'
 
       - name: Pack structure gate
         run: python3 tools/dev/validate_icons.py
