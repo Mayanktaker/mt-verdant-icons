@@ -27,6 +27,9 @@ theme's `palette/` or build files**.
   `src/cursors/MT-Verdant-Cursors` and `src/cursors/MT-Verdant-Cursors-Light` (default: all).
 - Vendor gate: `python3 tools/dev/check_upstream_assets.py` (hashes match `provenance.json`).
 - Structure gate: `python3 tools/dev/validate_icons.py` (index.theme coverage, all four packs).
+- Cursor structure gate: `python3 tools/dev/check_cursor_structure.py [--dump]` (Xcursor TOC
+  validation; CI diffs the committed vs rebuilt dump — pixel bytes stay unchecked because they
+  depend on the runner's Pillow build).
 - Refresh vendor tree: `python3 tools/dev/vendor_upstream_icons.py --force` (host-only, commit the diff).
 - Package: `sh tools/icons/package.sh [version]` → `dist/mt-verdant-icons-v<version>.tar.xz`.
 - Archive gate: `python3 tools/dev/check_release_archive.py` (install/uninstall in throwaway HOMEs).
@@ -53,8 +56,9 @@ theme's `palette/` or build files**.
 - Vendored upstream glyphs are never edited by hand; refresh them with the vendoring tool and
   review the diff. Glyphs dropped by newer upstream releases go to `upstream/retained/` so users
   keep them.
-- Generated SVG and cursor output is committed; PNGs are not compared byte for byte in CI because
-  rasterisation depends on the local librsvg build.
+- Generated SVG and cursor output is committed; PNGs and cursor pixel bytes are not compared byte
+  for byte in CI because rasterisation depends on the local librsvg/Pillow build — cursor TOC
+  structure is drift-checked instead.
 - Keep pack names and version in `palette/icons.json`; scripts read them from there.
 
 ## Conventions

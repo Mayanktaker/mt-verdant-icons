@@ -21,6 +21,10 @@ jobs:
       - name: Vendored upstream glyph gate
         run: python3 tools/dev/check_upstream_assets.py
 
+      # Snapshot the committed cursor TOC structure before the rebuild overwrites it.
+      - name: Snapshot committed cursor structure
+        run: python3 tools/dev/check_cursor_structure.py --dump > /tmp/cursors-before.txt
+
       - name: Build icon pack
         run: python3 tools/icons/generate_icons.py
 
@@ -34,6 +38,14 @@ jobs:
         run: |
           git add -N src
           git diff --exit-code -- ':(glob)src/icons/**/*.svg' ':(glob)src/icons/**/index.theme' ':(glob)src/cursors/**/index.theme'
+
+      # Xcursor pixel bytes depend on the runner's Pillow build, but the struct-packed TOC
+      # (frames, sizes, hotspots, delays) is deterministic and must not drift.
+      - name: Cursor structure is up to date
+        run: |
+          python3 tools/dev/check_cursor_structure.py
+          python3 tools/dev/check_cursor_structure.py --dump > /tmp/cursors-after.txt
+          diff -u /tmp/cursors-before.txt /tmp/cursors-after.txt
 
       - name: Pack structure gate
         run: python3 tools/dev/validate_icons.py

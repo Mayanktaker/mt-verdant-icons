@@ -87,6 +87,10 @@ literal (surface, stroke and accent) to its light counterpart at build time, so 
 or a light mapping updates every icon that uses it. The theme repo keeps its own palette; colour
 changes do not flow between the two repos.
 
+Tweaking the light look is one edit plus one rebuild: adjust a hex in `variants.light`, then run
+`python3 tools/icons/generate_icons.py --variant light` (and `generate_cursors.py --variant light`
+for cursors) — the change reaches every icon at once.
+
 ## Layout
 
 ```
