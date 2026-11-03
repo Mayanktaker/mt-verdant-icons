@@ -2,25 +2,28 @@
 
 © Mayanktaker Computers & Web Development | https://mayanktaker.com
 
-A botanical dark icon and cursor suite for Linux desktops — GNOME, KDE Plasma, XFCE, Cinnamon and
-Hyprland. Companion artwork for the [MT Verdant Nocturne](https://github.com/Mayanktaker/mt-verdant-nocturne)
-theme, maintained and versioned separately.
+A botanical icon and cursor suite for Linux desktops — GNOME, KDE Plasma, XFCE, Cinnamon and
+Hyprland — in **dark and light variants**. Companion artwork for the
+[MT Verdant Nocturne](https://github.com/Mayanktaker/mt-verdant-nocturne) theme, maintained and
+versioned separately.
 
 ## Packs
 
 | Pack | Technical name | Contents |
 | --- | --- | --- |
-| Icons | `MT-Verdant-Icons` | 100+ application icons, folder artwork, devices, MIME types and full symbolic coverage |
-| Cursors | `MT-Verdant-Cursors` | 12 crisp Xcursor categories with sage and emerald detailing |
+| Icons (dark) | `MT-Verdant-Icons` | 100+ application icons, folder artwork, devices, MIME types and full symbolic coverage |
+| Cursors (dark) | `MT-Verdant-Cursors` | 12 crisp Xcursor categories with sage and emerald detailing |
+| Icons (light) | `MT-Verdant-Icons-Light` | The same complete icon set recoloured for light themes |
+| Cursors (light) | `MT-Verdant-Cursors-Light` | Ivory cursors with a deep-green outline for light themes |
 
 ## Install
 
 From a release archive:
 
 ```bash
-curl -sSLO https://github.com/Mayanktaker/mt-verdant-icons/releases/latest/download/mt-verdant-icons-v1.0.0.tar.xz
-tar -xf mt-verdant-icons-v1.0.0.tar.xz
-cd mt-verdant-icons-v1.0.0
+curl -sSLO https://github.com/Mayanktaker/mt-verdant-icons/releases/latest/download/mt-verdant-icons-v1.1.0.tar.xz
+tar -xf mt-verdant-icons-v1.1.0.tar.xz
+cd mt-verdant-icons-v1.1.0
 ./install.sh
 ```
 
@@ -32,15 +35,19 @@ cd mt-verdant-icons
 ./install.sh
 ```
 
-`install.sh` writes to `~/.icons` only — no sudo and no system directories.
+`install.sh` writes to `~/.icons` only — no sudo and no system directories. Run without a variant
+flag it asks which variant to install (default: both); non-interactive runs install both silently.
+Installing both keeps the dark packs active — switch to light anytime from your desktop's theme
+settings.
 
 | Flag | Effect |
 | --- | --- |
-| *(none)* | Install and activate both packs |
-| `--icons-only` | Install the icon pack only |
-| `--cursors-only` | Install the cursor pack only |
+| *(none)* | Ask which variant to install, then install and activate it |
+| `--dark` / `--light` / `--both` | Pick the variant without being asked |
+| `--icons-only` | Install icon packs only |
+| `--cursors-only` | Install cursor packs only |
 | `--no-activate` | Copy files without changing `gsettings` |
-| `--uninstall` | Remove both packs from `~/.icons` |
+| `--uninstall` | Remove every variant from `~/.icons` |
 
 ## Requirements
 
@@ -51,10 +58,13 @@ cd mt-verdant-icons
 ## Build from source
 
 ```bash
-python3 tools/icons/generate_icons.py     # -> src/icons/MT-Verdant-Icons
-python3 tools/icons/generate_cursors.py   # -> src/cursors/MT-Verdant-Cursors
-sh tools/icons/package.sh 1.0.0            # -> dist/mt-verdant-icons-v1.0.0.tar.xz
+python3 tools/icons/generate_icons.py     # -> src/icons/MT-Verdant-Icons + -Light
+python3 tools/icons/generate_cursors.py   # -> src/cursors/MT-Verdant-Cursors + -Light
+sh tools/icons/package.sh 1.1.0            # -> dist/mt-verdant-icons-v1.1.0.tar.xz
 ```
+
+Both generators default to building the dark and light variants; pass `--variant dark` or
+`--variant light` to build just one.
 
 Generated SVG and cursor output is committed so a clone is installable without Python. CI rebuilds
 and fails on any drift.
@@ -71,16 +81,18 @@ python3 tools/dev/check_upstream_assets.py
 
 ## Palette
 
-Every brand colour lives in `palette/icons.json`. Artwork literals listed under `aliases` are
-remapped to the current token value at build time, so changing a token updates every icon that
-uses it. The theme repo keeps its own palette; colour changes do not flow between the two repos.
+Every brand colour lives in `palette/icons.json`. The top-level `colors`/`aliases` block defines
+the dark variant; `variants.light` holds the light recolor table, which remaps every artwork
+literal (surface, stroke and accent) to its light counterpart at build time, so changing a token
+or a light mapping updates every icon that uses it. The theme repo keeps its own palette; colour
+changes do not flow between the two repos.
 
 ## Layout
 
 ```
-palette/icons.json      palette tokens, pack names, version
-src/icons/              generated icon theme (committed)
-src/cursors/            generated cursor theme (committed)
+palette/icons.json      palette tokens, variants, pack names, version
+src/icons/              generated icon themes, dark + light (committed)
+src/cursors/            generated cursor themes, dark + light (committed)
 tools/icons/            generators, artwork catalog, packaging
 tools/icons/upstream/   vendored upstream glyphs + provenance.json
 tools/dev/              gates (vendor, structure, archive)

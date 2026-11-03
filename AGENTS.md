@@ -13,26 +13,31 @@ theme's `palette/` or build files**.
 - Installation policy: user packs go to the user's `~/.icons` ONLY. No sudo, no system dirs.
 
 ## Single source of truth
-- `palette/icons.json` — pack names, version and every brand colour. No magic values in new code;
-  add tokens instead. Existing artwork literals are listed under `aliases` and remapped at build
-  time, so editing a token reaches every icon that used the original hex.
+- `palette/icons.json` — pack names (all four), version and every brand colour. No magic values
+  in new code; add tokens instead. The top-level `colors`/`aliases` block IS the dark variant;
+  `variants.light` holds a flat literal→hex recolor table (plus light token values) applied at
+  build time. Neutral literals (`#000000`, `#FFFFFF`) and vendored upstream glyphs are never
+  recoloured.
 - Upstream glyphs are vendored under `tools/icons/upstream/`; never harvest them at build time.
 
 ## Commands
-- Build icons: `python3 tools/icons/generate_icons.py` → `src/icons/MT-Verdant-Icons`.
-- Build cursors: `python3 tools/icons/generate_cursors.py` → `src/cursors/MT-Verdant-Cursors`.
+- Build icons: `python3 tools/icons/generate_icons.py [--variant dark|light|all]` →
+  `src/icons/MT-Verdant-Icons` and `src/icons/MT-Verdant-Icons-Light` (default: all).
+- Build cursors: `python3 tools/icons/generate_cursors.py [--variant dark|light|all]` →
+  `src/cursors/MT-Verdant-Cursors` and `src/cursors/MT-Verdant-Cursors-Light` (default: all).
 - Vendor gate: `python3 tools/dev/check_upstream_assets.py` (hashes match `provenance.json`).
-- Structure gate: `python3 tools/dev/validate_icons.py` (index.theme coverage, pack size).
+- Structure gate: `python3 tools/dev/validate_icons.py` (index.theme coverage, all four packs).
 - Refresh vendor tree: `python3 tools/dev/vendor_upstream_icons.py --force` (host-only, commit the diff).
 - Package: `sh tools/icons/package.sh [version]` → `dist/mt-verdant-icons-v<version>.tar.xz`.
-- Archive gate: `python3 tools/dev/check_release_archive.py` (install + uninstall in a throwaway HOME).
-- Install: `./install.sh [--no-activate] [--icons-only|--cursors-only|--uninstall]`.
+- Archive gate: `python3 tools/dev/check_release_archive.py` (install/uninstall in throwaway HOMEs).
+- Install: `./install.sh [--dark|--light|--both] [--no-activate] [--icons-only|--cursors-only|--uninstall]`;
+  prompts for a variant interactively, non-interactive runs install both, both → dark activated.
 - CI: `.github/workflows/gates.yml` (PR/push) and `release.yml` (v* tags).
 
 ## Layout
-- `palette/icons.json` — tokens, pack names, version
-- `src/icons/` — generated `MT-Verdant-Icons` (committed artifact)
-- `src/cursors/` — generated `MT-Verdant-Cursors` (committed artifact)
+- `palette/icons.json` — tokens, light variant table, pack names, version
+- `src/icons/` — generated `MT-Verdant-Icons` + `MT-Verdant-Icons-Light` (committed artifacts)
+- `src/cursors/` — generated `MT-Verdant-Cursors` + `MT-Verdant-Cursors-Light` (committed artifacts)
 - `tools/icons/` — generators, artwork catalog, `palette_tokens.py`, `upstream_assets.py`, `package.sh`
 - `tools/icons/upstream/` — vendored GNOME Shell / libadwaita / extension glyphs + `provenance.json`
 - `tools/dev/` — vendor, structure and archive gates
@@ -40,8 +45,11 @@ theme's `palette/` or build files**.
 - `dist/` — generated archives (gitignored)
 
 ## Artwork rules
-- Every SVG write goes through `palette_tokens.resolve()`; placeholders and aliases must resolve to
-  a value in `palette/icons.json`.
+- Every SVG write goes through a variant binding from `palette_tokens.for_variant()`
+  (`resolve()`/`rgb()`/`rgba()`); placeholders and aliases must resolve to a value in
+  `palette/icons.json`. New artwork colours must be all-caps hex so the remap stays exact.
+- Dark output is the identity mapping — keep it byte-identical unless a token is deliberately
+  changed; light values must never collide with an artwork literal (loader asserts this).
 - Vendored upstream glyphs are never edited by hand; refresh them with the vendoring tool and
   review the diff. Glyphs dropped by newer upstream releases go to `upstream/retained/` so users
   keep them.

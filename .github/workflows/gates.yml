@@ -29,8 +29,11 @@ jobs:
 
       # SVG output is deterministic Python; PNG and Xcursor rasterisation depend on the runner's
       # librsvg/Pillow build, so only the vector artwork is compared byte for byte.
+      # -N (intent-to-add) pulls freshly generated but uncommitted files into the diff too.
       - name: Committed SVG artwork is up to date
-        run: git diff --exit-code -- ':(glob)src/icons/**/*.svg' ':(glob)src/icons/**/index.theme'
+        run: |
+          git add -N src
+          git diff --exit-code -- ':(glob)src/icons/**/*.svg' ':(glob)src/icons/**/index.theme' ':(glob)src/cursors/**/index.theme'
 
       - name: Pack structure gate
         run: python3 tools/dev/validate_icons.py

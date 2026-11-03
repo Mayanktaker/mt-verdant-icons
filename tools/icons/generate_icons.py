@@ -1,8 +1,8 @@
 # © Mayanktaker Computers & Web Development | https://mayanktaker.com
-# Generates MT-Verdant-Icons suite: vector SVGs, multi-res PNGs, and theme metadata.
-# High-definition botanical dark green palette with rich gradients and crisp contrast.
+# Generates MT-Verdant-Icons suites (dark + light): vector SVGs, multi-res PNGs, theme metadata.
+# High-definition botanical palette with rich gradients and crisp contrast.
 
-import os
+import argparse
 import shutil
 from pathlib import Path
 import cairo
@@ -31,7 +31,18 @@ except ImportError:
     from tools.icons import palette_tokens
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-OUT_DIR = REPO_ROOT / "src" / "icons" / "MT-Verdant-Icons"
+
+# Per-variant index.theme copy: honest names in theme pickers plus matching fallback chain.
+VARIANT_META = {
+    "dark": {
+        "comment": "Botanical Canopy high-definition dark green icon suite for MT Verdant Nocturne",
+        "inherits": "Adwaita,breeze-dark,hicolor",
+    },
+    "light": {
+        "comment": "Botanical Canopy light icon suite, bright companion of MT Verdant",
+        "inherits": "Adwaita,breeze,hicolor",
+    },
+}
 
 # =========================================================================
 # High-Definition SVG Folder Template (Rich gradients, highlights, depth)
@@ -209,8 +220,8 @@ PLACES_ALIASES = {
     "folder-apps": "folder-applications",
     "applications": "folder-applications",
     "folder-calibre": "folder-books",
-    "folder-network": "network-workgroup",
-    "network": "network-workgroup",
+    "folder-network": "folder-remote",
+    "network": "folder-remote",
     "inode-directory": "folder",
     "folder_color": "folder",
     "user-trash-full": "user-trash",
@@ -976,9 +987,9 @@ DEVICE_ALIASES = {
 }
 
 INDEX_THEME = """[Icon Theme]
-Name=MT-Verdant-Icons
-Comment=Botanical Canopy high-definition dark green icon suite for MT Verdant Nocturne
-Inherits=Adwaita,breeze-dark,hicolor
+Name={name}
+Comment={comment}
+Inherits={inherits}
 Directories=scalable/places,scalable/apps,scalable/status,scalable/devices,scalable/actions,scalable/categories,scalable/ui,scalable/mimetypes,symbolic/actions,symbolic/apps,symbolic/categories,symbolic/devices,symbolic/places,symbolic/status,symbolic/ui,32x32/places,32x32/apps,32x32/devices,32x32/mimetypes,48x48/places,48x48/apps,48x48/devices,48x48/mimetypes,64x64/places,64x64/apps,64x64/devices,64x64/mimetypes,128x128/places,128x128/apps,128x128/devices,128x128/mimetypes
 
 [scalable/places]
@@ -1177,16 +1188,16 @@ def render_svg_to_png(svg_text: str, out_path: Path, size: int) -> None:
     out_path.parent.mkdir(parents=True, exist_ok=True)
     surf.write_to_png(str(out_path))
 
-def build_places() -> None:
+def build_places(pal, out_dir: Path) -> None:
     # Build places icons (folders, special directories).
-    scalable_dir = OUT_DIR / "scalable" / "places"
+    scalable_dir = out_dir / "scalable" / "places"
     scalable_dir.mkdir(parents=True, exist_ok=True)
 
     for name, emblem in PLACES_EMBLEMS.items():
-        svg_content = palette_tokens.resolve(SVG_FOLDER_BASE + emblem + "\n" + SVG_FOOTER)
+        svg_content = pal.resolve(SVG_FOLDER_BASE + emblem + "\n" + SVG_FOOTER)
         (scalable_dir / f"{name}.svg").write_text(svg_content)
         for size in [32, 48, 64, 128]:
-            png_file = OUT_DIR / f"{size}x{size}" / "places" / f"{name}.png"
+            png_file = out_dir / f"{size}x{size}" / "places" / f"{name}.png"
             render_svg_to_png(svg_content, png_file, size)
 
     for alias, target in PLACES_ALIASES.items():
@@ -1195,22 +1206,22 @@ def build_places() -> None:
             dst_svg.unlink()
         dst_svg.symlink_to(f"{target}.svg")
         for size in [32, 48, 64, 128]:
-            size_dir = OUT_DIR / f"{size}x{size}" / "places"
+            size_dir = out_dir / f"{size}x{size}" / "places"
             dst_png = size_dir / f"{alias}.png"
             if dst_png.exists() or dst_png.is_symlink():
                 dst_png.unlink()
             dst_png.symlink_to(f"{target}.png")
 
-def build_apps() -> None:
+def build_apps(pal, out_dir: Path) -> None:
     # Build application icons.
-    scalable_dir = OUT_DIR / "scalable" / "apps"
+    scalable_dir = out_dir / "scalable" / "apps"
     scalable_dir.mkdir(parents=True, exist_ok=True)
 
     for name, svg_content in APP_ICONS.items():
-        svg_content = palette_tokens.resolve(svg_content)
+        svg_content = pal.resolve(svg_content)
         (scalable_dir / f"{name}.svg").write_text(svg_content)
         for size in [32, 48, 64, 128]:
-            png_file = OUT_DIR / f"{size}x{size}" / "apps" / f"{name}.png"
+            png_file = out_dir / f"{size}x{size}" / "apps" / f"{name}.png"
             render_svg_to_png(svg_content, png_file, size)
 
     for alias, target in APP_ALIASES.items():
@@ -1219,24 +1230,24 @@ def build_apps() -> None:
             dst_svg.unlink()
         dst_svg.symlink_to(f"{target}.svg")
         for size in [32, 48, 64, 128]:
-            size_dir = OUT_DIR / f"{size}x{size}" / "apps"
+            size_dir = out_dir / f"{size}x{size}" / "apps"
             dst_png = size_dir / f"{alias}.png"
             if dst_png.exists() or dst_png.is_symlink():
                 dst_png.unlink()
             dst_png.symlink_to(f"{target}.png")
 
-def build_symbolic() -> None:
+def build_symbolic(pal, out_dir: Path) -> None:
     # Build symbolic wireframe icons for sidebar navigation, settings, devices, and UI actions.
     contexts = ["status", "places", "devices", "actions", "categories", "apps", "ui"]
-    scalable_dirs = {ctx: OUT_DIR / "scalable" / ctx for ctx in contexts}
-    symbolic_dirs = {ctx: OUT_DIR / "symbolic" / ctx for ctx in contexts}
+    scalable_dirs = {ctx: out_dir / "scalable" / ctx for ctx in contexts}
+    symbolic_dirs = {ctx: out_dir / "symbolic" / ctx for ctx in contexts}
 
     for d in list(scalable_dirs.values()) + list(symbolic_dirs.values()):
         d.mkdir(parents=True, exist_ok=True)
 
     def write_icon(target_contexts: list[str], icon_name: str, svg_content: str) -> None:
-        # Resolve palette tokens before writing so a token change reaches every context.
-        svg_content = palette_tokens.resolve(svg_content)
+        # Resolve palette tokens before writing so a variant change reaches every context.
+        svg_content = pal.resolve(svg_content)
         filename = f"{icon_name}.svg" if not icon_name.endswith(".svg") else icon_name
         for ctx in target_contexts:
             if ctx in scalable_dirs:
@@ -1290,16 +1301,16 @@ def build_symbolic() -> None:
     for icon_name, svg_text in UPSTREAM_ICONS.items():
         write_icon(["actions", "status", "ui"], icon_name, svg_text)
 
-def build_devices() -> None:
+def build_devices(pal, out_dir: Path) -> None:
     # Build hardware storage devices icons (HDD, SSD, USB external, Partition).
-    scalable_dir = OUT_DIR / "scalable" / "devices"
+    scalable_dir = out_dir / "scalable" / "devices"
     scalable_dir.mkdir(parents=True, exist_ok=True)
 
     for name, svg_content in DEVICE_ICONS.items():
-        svg_content = palette_tokens.resolve(svg_content)
+        svg_content = pal.resolve(svg_content)
         (scalable_dir / f"{name}.svg").write_text(svg_content)
         for size in [32, 48, 64, 128]:
-            png_file = OUT_DIR / f"{size}x{size}" / "devices" / f"{name}.png"
+            png_file = out_dir / f"{size}x{size}" / "devices" / f"{name}.png"
             render_svg_to_png(svg_content, png_file, size)
 
     # Link device aliases
@@ -1310,47 +1321,62 @@ def build_devices() -> None:
         svg_alias.symlink_to(f"{target}.svg")
 
         for size in [32, 48, 64, 128]:
-            size_dir = OUT_DIR / f"{size}x{size}" / "devices"
+            size_dir = out_dir / f"{size}x{size}" / "devices"
             dst_png = size_dir / f"{alias}.png"
             if dst_png.exists() or dst_png.is_symlink():
                 dst_png.unlink()
             dst_png.symlink_to(f"{target}.png")
 
-def build_mimetypes() -> None:
+def build_mimetypes(pal, out_dir: Path) -> None:
     # Build MIME type document icons.
-    scalable_dir = OUT_DIR / "scalable" / "mimetypes"
+    scalable_dir = out_dir / "scalable" / "mimetypes"
     scalable_dir.mkdir(parents=True, exist_ok=True)
 
     for name, svg_content in MIME_ICONS.items():
-        svg_content = palette_tokens.resolve(svg_content)
+        svg_content = pal.resolve(svg_content)
         (scalable_dir / f"{name}.svg").write_text(svg_content)
         for size in [32, 48, 64, 128]:
-            png_file = OUT_DIR / f"{size}x{size}" / "mimetypes" / f"{name}.png"
+            png_file = out_dir / f"{size}x{size}" / "mimetypes" / f"{name}.png"
             render_svg_to_png(svg_content, png_file, size)
 
-def main() -> None:
-    # Clean and assemble full MT-Verdant-Icons suite.
-    if OUT_DIR.exists():
-        shutil.rmtree(OUT_DIR)
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
-    (OUT_DIR / "index.theme").write_text(INDEX_THEME)
+def build_suite(variant: str, pal, out_dir: Path) -> None:
+    # Clean and assemble one full icon suite for a variant.
+    if out_dir.exists():
+        shutil.rmtree(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    meta = VARIANT_META[variant]
+    pack = palette_tokens.pack_name("icons", variant)
+    (out_dir / "index.theme").write_text(
+        INDEX_THEME.format(name=pack, comment=meta["comment"], inherits=meta["inherits"])
+    )
 
-    print("Building Places Icons...")
-    build_places()
+    print(f"Building Places Icons ({variant})...")
+    build_places(pal, out_dir)
 
     print("Building App Icons (LibreOffice, Antigravity, Geary, Disks, Console)...")
-    build_apps()
+    build_apps(pal, out_dir)
 
     print("Building Devices Icons (HDD, SSD, USB External, Partition, Media)...")
-    build_devices()
+    build_devices(pal, out_dir)
 
     print("Building Symbolic Icons (Fixing Blur my Shell, Settings, Storage Drives)...")
-    build_symbolic()
+    build_symbolic(pal, out_dir)
 
     print("Building MIME Type Icons...")
-    build_mimetypes()
+    build_mimetypes(pal, out_dir)
 
-    print(f"\nMT-Verdant-Icons suite successfully assembled in {OUT_DIR}")
+    print(f"\n{pack} suite successfully assembled in {out_dir}")
+
+def main() -> None:
+    # Build the requested icon variant(s); default builds dark and light.
+    parser = argparse.ArgumentParser(description="Generate MT Verdant icon suites")
+    parser.add_argument("--variant", choices=["dark", "light", "all"], default="all",
+                        help="which variant to build (default: all)")
+    args = parser.parse_args()
+    for variant in (["dark", "light"] if args.variant == "all" else [args.variant]):
+        pal = palette_tokens.for_variant(variant)
+        out_dir = REPO_ROOT / "src" / "icons" / palette_tokens.pack_name("icons", variant)
+        build_suite(variant, pal, out_dir)
 
 if __name__ == "__main__":
     main()

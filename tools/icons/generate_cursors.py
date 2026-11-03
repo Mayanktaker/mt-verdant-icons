@@ -1,9 +1,9 @@
 # © Mayanktaker Computers & Web Development | https://mayanktaker.com
-# Generates MT-Verdant-Cursors suite: sleek aerodynamic botanical cursors.
+# Generates MT-Verdant-Cursors suites (dark + light): sleek aerodynamic botanical cursors.
 # High-definition multi-resolution (24, 32, 48) Xcursor suite with smooth curves and sage glow.
 
+import argparse
 import math
-import os
 import shutil
 import struct
 from pathlib import Path
@@ -16,20 +16,35 @@ except ImportError:
     from tools.icons import palette_tokens
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-OUT_DIR = REPO_ROOT / "src" / "cursors" / "MT-Verdant-Cursors"
 
-# Palette tokens from palette/icons.json
+# Palette tokens from palette/icons.json, bound per variant by _bind_colors().
 COLOR_BODY = palette_tokens.rgba("obsidian")
 COLOR_ACCENT = palette_tokens.rgba("sage")
 COLOR_EMERALD = palette_tokens.rgba("emerald")
 COLOR_CORAL = palette_tokens.rgba("coral")
 COLOR_SHADOW = palette_tokens.rgba("shadow", 130)
 
+# Per-variant index.theme copy so theme pickers show distinct, honest names.
+VARIANT_COMMENTS = {
+    "dark": "Sleek aerodynamic botanical cursor suite for MT Verdant Nocturne",
+    "light": "Sleek aerodynamic botanical cursor suite, light companion of MT Verdant",
+}
+
 INDEX_THEME = """[Icon Theme]
-Name=MT-Verdant-Cursors
-Comment=Sleek aerodynamic botanical cursor suite for MT Verdant Nocturne
+Name={name}
+Comment={comment}
 Inherits=Adwaita
 """
+
+
+def _bind_colors(pal) -> None:
+    # Rebind the shared drawing constants to one variant's tokens.
+    global COLOR_BODY, COLOR_ACCENT, COLOR_EMERALD, COLOR_CORAL, COLOR_SHADOW
+    COLOR_BODY = pal.rgba("obsidian")
+    COLOR_ACCENT = pal.rgba("sage")
+    COLOR_EMERALD = pal.rgba("emerald")
+    COLOR_CORAL = pal.rgba("coral")
+    COLOR_SHADOW = pal.rgba("shadow", 130)
 
 def img_to_premultiplied_bgra(img: Image.Image) -> bytes:
     # Convert RGBA Pillow image to premultiplied BGRA bytes for Xcursor binary format
@@ -293,7 +308,7 @@ def draw_spinner_frame(target_size: int, frame_idx: int, num_frames: int = 8, wi
         ay = scy + math.sin(a) * sr
         dot_r = (2.0 + 3.5 * (i / num_frames)) * s
         alpha = int(60 + 195 * (i / num_frames))
-        col = (61, 214, 140, alpha)
+        col = (*COLOR_EMERALD[:3], alpha)
         draw.ellipse([(ax - dot_r, ay - dot_r), (ax + dot_r, ay + dot_r)], fill=col)
         
     final_img = im.resize((target_size, target_size), Image.Resampling.LANCZOS)
@@ -301,14 +316,18 @@ def draw_spinner_frame(target_size: int, frame_idx: int, num_frames: int = 8, wi
     yhot = int(round(4 * (target_size / 32.0))) if with_pointer else target_size // 2
     return final_img, xhot, yhot
 
-def build_cursor_theme() -> None:
-    # Build complete MT-Verdant-Cursors theme directory
-    if OUT_DIR.exists():
-        shutil.rmtree(OUT_DIR)
-        
-    out_cursors = OUT_DIR / "cursors"
+def build_cursor_theme(variant: str, out_dir: Path, pal) -> None:
+    # Build one complete cursor theme directory; binding colors here keeps state and build atomic.
+    _bind_colors(pal)
+    if out_dir.exists():
+        shutil.rmtree(out_dir)
+
+    pack = palette_tokens.pack_name("cursors", variant)
+    out_cursors = out_dir / "cursors"
     out_cursors.mkdir(parents=True, exist_ok=True)
-    (OUT_DIR / "index.theme").write_text(INDEX_THEME)
+    (out_dir / "index.theme").write_text(
+        INDEX_THEME.format(name=pack, comment=VARIANT_COMMENTS[variant])
+    )
     
     sizes = [24, 32, 48]
     
@@ -400,7 +419,21 @@ def build_cursor_theme() -> None:
             if not dst.exists():
                 dst.symlink_to(target)
                 
-    print(f"Generated {len(aliases)} cursor categories with symlinks into {OUT_DIR}")
+    print(f"Generated {len(aliases)} cursor categories with symlinks into {out_dir}")
+
+
+def main() -> None:
+    # Build the requested cursor variant(s); default builds dark and light.
+    parser = argparse.ArgumentParser(description="Generate MT Verdant cursor suites")
+    parser.add_argument("--variant", choices=["dark", "light", "all"], default="all",
+                        help="which variant to build (default: all)")
+    args = parser.parse_args()
+    for variant in (["dark", "light"] if args.variant == "all" else [args.variant]):
+        pal = palette_tokens.for_variant(variant)
+        out_dir = REPO_ROOT / "src" / "cursors" / palette_tokens.pack_name("cursors", variant)
+        print(f"Building {variant} cursors -> {out_dir.name}")
+        build_cursor_theme(variant, out_dir, pal)
+
 
 if __name__ == "__main__":
-    build_cursor_theme()
+    main()

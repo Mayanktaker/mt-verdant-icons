@@ -2,14 +2,16 @@
   "meta": {
     "name": "MT Verdant Icon Pack",
     "tech_name": "MT-Verdant-Icon-Pack",
-    "version": "1.0.0",
-    "direction": "Botanical Canopy dark icon and cursor suite",
+    "version": "1.1.0",
+    "direction": "Botanical Canopy dark and light icon and cursor suites",
     "source": "Extracted from the MT Verdant Nocturne theme suite and maintained standalone",
     "upstream_theme": "https://github.com/Mayanktaker/mt-verdant-nocturne"
   },
   "packs": {
     "icons": "MT-Verdant-Icons",
-    "cursors": "MT-Verdant-Cursors"
+    "cursors": "MT-Verdant-Cursors",
+    "icons_light": "MT-Verdant-Icons-Light",
+    "cursors_light": "MT-Verdant-Cursors-Light"
   },
   "colors": {
     "obsidian": "#0F141B",
@@ -28,5 +30,57 @@
     "coral": ["#E5737F"],
     "ink": ["#EDF5F1"],
     "shadow": ["#000000"]
+  },
+  "variants": {
+    "light": {
+      "colors": {
+        "obsidian": "#FAFDFB",
+        "canvas": "#DBE8E1",
+        "sage": "#3F7A63",
+        "emerald": "#0E8A4E",
+        "coral": "#D6495C",
+        "ink": "#24443A",
+        "shadow": "#000000"
+      },
+      "aliases": {
+        "#193138": "#E3EDE7",
+        "#102026": "#DAE7E0",
+        "#13262D": "#DDE9E3",
+        "#14262C": "#DDE9E3",
+        "#152B32": "#DFEAE5",
+        "#152C33": "#E0EBE5",
+        "#16222A": "#DBE8E1",
+        "#162C33": "#E0EBE5",
+        "#162D34": "#E0EBE5",
+        "#162D35": "#E0EBE6",
+        "#162E35": "#E1EBE6",
+        "#162E36": "#E1ECE6",
+        "#172F37": "#E1ECE6",
+        "#182E36": "#E1ECE6",
+        "#18323A": "#E3EDE8",
+        "#18343D": "#E4EEE9",
+        "#183640": "#E6EFEA",
+        "#1A333A": "#E4EEE8",
+        "#1A3740": "#E6EFEB",
+        "#1B353D": "#E5EFEA",
+        "#1C3840": "#E7F0EB",
+        "#1C3841": "#E7F0EB",
+        "#1D3238": "#E3EDE8",
+        "#1E3B44": "#E9F1ED",
+        "#1E3E47": "#EBF3EF",
+        "#204049": "#EDF4F0",
+        "#20404A": "#EDF4F0",
+        "#224854": "#F4F9F6",
+        "#24444D": "#F1F7F3",
+        "#0B1317": "#D6E4DD",
+        "#0D1A1F": "#D8E5DF",
+        "#2E555F": "#5C8677",
+        "#2C3E44": "#6B9186",
+        "#E5B580": "#B07426",
+        "#E5A855": "#A26A1F",
+        "#7FC8A0": "#2A8A60",
+        "#56C8D8": "#17808F"
+      }
+    }
   }
 }
